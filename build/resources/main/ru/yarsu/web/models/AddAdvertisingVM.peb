@@ -1,0 +1,43 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.AddAdvertisingVM" #}
+    {% extends "./partials/Layout.peb" %}
+{% block tittle %}addAdvertising{% endblock %}
+{% block content %}
+    <div class="container form-container">
+        <h2 class="form-heading text-center">Добавить объявление</h2>
+        <div class="card mb-4">
+        <div class="card-body">
+        <h5 class="card-title">Информация о пользователе</h5>
+         <p class="card-text"><strong>Имя:</strong> {{model.person.name}}</p>
+          <p class="card-text"><strong>Фамилия:</strong> {{model.person.surname}}</p>
+         <p class="card-text"><strong>Отчество:</strong> {{model.person.patronymic}}</p>
+          <p class="card-text"><strong>Образование:</strong></p>
+            {% for education in model.person.education %}
+           <p class="card-text">{{ education }}</p>
+{% endfor %}
+            <p class="card-text"><strong>Телефон:</strong> {{ model.person.phoneNumber }}</p>
+            <p class="card-text"><strong>ID в социальных сетях:</strong></p>
+            {% for idSocial in model.person.idSocialNetwork %}
+             <p class="card-text">{{ idSocial }}</p>
+{% endfor %}
+        </div>
+        </div>
+        <form method="POST">
+            <div class="mb-3">
+            <p>Категория услуг</p>
+            <select name="category" class="form-select" aria-label="Default select example">
+              <option selected value={{model.listCategory[0]}}>{{ model.listCategory[0] }}</option>
+              {% for profession in model.listCategory %}
+    {% if profession != model.listCategory[0] %}
+                 <option value={{profession}}>{{profession}}</option>
+    {% endif %}
+        {% endfor %}
+           </select>
+            </div>
+            <div class="mb-3 form-check">
+                <input name="license" type="checkbox" class="form-check-input" id="licenseCheck">
+                <label class="form-check-label" for="licenseCheck">Есть лицензия</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.NewCategoryVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}NewCategory{% endblock %}
+{% block content %}
+<div class="container form-container">
+<div class="card mb-4">
+      <div class="card-body">
+<form method="POST">
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Введите категорию услуг:</label>
+        <input name="category" type="text" class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+</div>
+</div>
+</div>
+   {% endblock %}

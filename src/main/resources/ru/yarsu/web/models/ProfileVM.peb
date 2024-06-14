@@ -1,0 +1,24 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.PersonVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}person{% endblock %}
+{% block content %}
+<div class="container form-container">
+        <div class="card mb-4">
+        <div class="card-body">
+        <h5 class="card-title">Информация о пользователе</h5>
+            <p class="card-text"><strong>Имя:</strong> {{model.person.name}}</p>
+            <p class="card-text"><strong>Фамилия:</strong> {{model.person.surname}}</p>
+            <p class="card-text"><strong>Отчество:</strong> {{model.person.patronymic}}</p>
+            <p class="card-text"><strong>Образование:</strong></p>
+            {% for education in model.person.education %}
+             <p class="card-text">{{ education }}</p>
+{% endfor %}
+            <p class="card-text"><strong>Телефон:</strong> {{ model.person.phoneNumber }}</p>
+            <p class="card-text"><strong>ID в социальных сетях:</strong></p>
+            {% for idSocial in model.person.idSocialNetwork %}
+             <p class="card-text">{{ idSocial }}</p>
+{% endfor %}
+           <a class="btn btn-primary" href="/myAdvertising">Мои объявления</a>
+        </div>
+        </div>
+{% endblock %}

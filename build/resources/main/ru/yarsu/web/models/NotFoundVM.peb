@@ -1,0 +1,6 @@
+{% extends "./partials/Layout.peb" %}
+    {% block title %}NotFound{% endblock %}
+{% block content %}
+ <h1>Такой страницы не существует</h1>
+ <a href="/">На главную</a>
+{% endblock %}

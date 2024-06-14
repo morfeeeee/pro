@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top bg-primary-subtle border border-primary-subtle">
+        <div class="container">
+            <a href="/" class = "link-dark">Сайт по поиску специалиста</a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNav" style="">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                    {% if user.role == "admin" %}
+                       <a class="nav-link" href="/users">Управление пользователями</a>
+                    {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        {% if user is empty %}
+                         <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Вход в систему
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" href="/login">Войти</a></li>
+                           <li><a class="dropdown-item" href="/addUser">Зарегестрироваться</a></li>
+                      </ul>
+                    </div>
+                {%else%}
+                 <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.login}}
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+                        {% if user.role == "specialist" %}
+                           <li><a class="dropdown-item" href="/profile">Профиль</a></li>
+{% endif %}
+                      </ul>
+                    </div>
+            {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  {% block content %}{% endblock %}
+    <script src="/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

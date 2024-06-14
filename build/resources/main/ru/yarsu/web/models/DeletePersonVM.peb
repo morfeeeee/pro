@@ -1,0 +1,21 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.DeletePersonVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}DeletePerson{% endblock %}
+    {%block content%}
+    <h1>{{ model.person.surname }} {{ model.person.name }} {{ model.person.patronymic }} будет удален?</h1>
+    <form method="POST">
+    <div class="mb-3">
+     <label class="form-check-label" for="invalidCheck">
+      <input name="delete" class="form-check-input" type="checkbox" id="invalidCheck" required>
+        Подтвердить:
+      </label>
+      </div>
+          <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+
+<div class="fixed-bottom">
+<a class="btn btn-light btn-lg" href="/profession{{ model.profession }}/person{{ model.person.id }}" role="button">Назад</a>
+</div>
+
+
+{%endblock%}

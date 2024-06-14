@@ -1,0 +1,23 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.MyAdvertisingVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}Specialists{% endblock %}
+{% block content %}
+<div class = "container">
+<div class="row">
+        {% for person in model.listAdvertising %}
+<div class="col-sm-6 ">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{person.name}} {{ person.surname }}  {{ person.patronymic }}</h5>
+            <h5 class="card-title">{{ person.category.name }}</h5>
+            <p class="card-text"> Образование: {% for i in person.education %} {{ i }} {% endfor %}</p>
+            <p class = "card-text"> Дата добавления на сайт: {{ person.dateAdd | date("yyyy-MM-dd") }} в {{ person.dateAdd | date("HH:mm") }}</p>
+            <a href="/profession{{model.translater[person.category.name] }}/person{{ person.id }}" class="btn btn-primary">Подробнее</a>
+        </div>
+    </div>
+</div>
+
+        {% endfor %}
+</div>
+</div>
+{% endblock %}

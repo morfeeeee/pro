@@ -1,0 +1,63 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.SpecialistsVM" #}
+{% extends "./partials/Layout.peb" %}
+    {% block title %}Specialists{% endblock %}
+{% block content %}
+<h4 class = "text-center">{{ model.profession}}</h4>
+<div class = "container">
+    <form method="GET">
+         <p class="fs-3">Укажите фильтры</p>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Введите количество образований</label>
+            <input name="countEducation" type="number" class="form-control" value="{{ model.countEducation }}" id="exampleInputEmail1">
+        </div>
+        <div class="mb-3 form-check">
+            <input name="license" type="checkbox" class="form-check-input" {% if model.license %}checked{% endif %} id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Есть лицензия</label>
+      </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+&nbsp;
+<div class = "container">
+<div class="row">
+        {% for person in model.listSpecialists %}
+<div class="col-sm-6 ">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{person.name}} {{ person.surname }}  {{ person.patronymic }}</h5>
+            <p class="card-text"> Образование: {% for i in person.education %} {{ i }} {% endfor %}</p>
+            <p class = "card-text"> Дата добавления на сайт: {{ person.dateAdd | date("yyyy-MM-dd") }} в {{ person.dateAdd | date("HH:mm") }}</p>
+            <a href="/profession{{model.tranlater[model.profession] }}/person{{ person.id }}" class="btn btn-primary">Подробнее</a>
+        </div>
+    </div>
+</div>
+
+        {% endfor %}
+</div>
+</div>
+<div class = "container">
+{% if model.emptyOrNot == 0 %}
+    <h1 class="text-center">Нет подходящих вариантов</h1>
+{% else %}
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+ {% for page in model.listPages %}
+    {% if page == "  ...  " %}
+    <a href="#" class="btn btn-primary active" aria-current="page">{{ page }}</a>
+        {% else %}
+    <a class="btn btn-primary" href="/{{ model.tranlater[model.profession] }}/page{{ page }}{{ model.url }}" role="button">{{ page }}</a>
+{% endif %}
+
+{% endfor %}
+{% endif %}
+
+</div>
+</div>
+<div class = "container">
+        <h4 class = "text-center">Выберете из списка специальность:</h4>
+        <div class="list-group">
+            {% for profession in model.tranlater.keySet() %}
+             <a href="/{{ model.tranlater[profession] }}/page1" class="list-group-item list-group-item-action list-group-item-info">{{ profession }}</a>
+             {% endfor %}
+    </div>
+</div>
+{% endblock %}

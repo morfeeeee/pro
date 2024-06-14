@@ -1,0 +1,45 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.HomePageVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}Home{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <img class="w-100" src="/images/HomeImg.jpg" alt="Работа есть">
+            </div>
+        <div class="col-9 align-self-center">
+            <h4 class="text-center">Самый быстрый подбор сотрудников</h4>
+        </div>
+    </div>
+</div>
+<div class = "container">
+        <h4 class = "text-center">Выберете из списка специальность:</h4>
+        <div class="list-group">
+            {% for profession in model.tranlater.keySet() %}
+             <a href="/{{ model.tranlater[profession] }}/page1" class="list-group-item list-group-item-action list-group-item-info">{{ profession }}</a>
+             {% endfor %}
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% if user.role == "admin"%}
+         <div class="col-4">
+            <a class="btn btn-primary btn-lg" href="/addPerson" role="button">Добавить объявление</a>
+        </div>
+{% endif %}
+    {% if user.role == "specialist" %}
+         <div class="col-4">
+            <a class="btn btn-primary btn-lg" href="/addAdvertising" role="button">Добавить объявление от вашего профиля</a>
+        </div>
+{% endif %}
+    {% if user.role == "admin" or user.role == "moderator" %}
+        <div class="col-4">
+            <a class="btn btn-primary btn-lg" href="/addCategory" role="button">Добавить категорию услуг</a>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-danger btn-lg" href="/deleteCategory" role="button">Удалить категорию услуг</a>
+        </div>
+{% endif %}
+    </div>
+</div>
+{% endblock %}

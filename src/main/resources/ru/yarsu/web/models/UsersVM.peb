@@ -1,0 +1,23 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.UsersVM" #}
+{% extends "./partials/Layout.peb" %}
+    {% block tittle %}users{% endblock %}
+
+
+{% block content %}
+     <div class="container mt-4">
+        <div class="d-flex justify-content-end mb-3">
+            <a class="btn btn-success" href="/addUser" role="button">Добавить пользователя</a>
+        </div>
+        <div class="list-group">
+            {% for user in model.listUsers %}
+             <div class="list-group-item d-flex justify-content-between align-items-center">
+             <div>Логин: {{ user.login }}</div>
+                <div>Дата добавления: {{ user.dateAdd | date("yyyy-MM-dd") }} в {{ user.dateAdd | date("HH:mm")}}</div>
+            </div>
+            <div>
+            <a class="btn btn-primary" href="/editUser{{ user.id }}" role="button">Редактировать</a>
+        </div>
+      {% endfor %}
+        </div>
+    </div>
+{% endblock %}

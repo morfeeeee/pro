@@ -1,0 +1,45 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.PersonVM" #}
+{% extends "./partials/Layout.peb" %}
+    {% block title %}person{% endblock %}
+{% block content %}
+<div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">{{model.person.name}} {{ model.person.surname }}  {{ model.person.patronymic }}</h2>
+                <h4 class="card-subtitle text-center mb-3">{{model.person.category.name}}</h4>
+                <p class="card-text"><strong>Образование:</strong>{% for i in  model.person.education %} {{ i }} {% endfor %}</p>
+                <p class="card-text text-center"><strong>Телефон:</strong> {{ model.person.phoneNumber }}</p>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p class="card-text"><strong>ID в социальных сетях:</strong></p>
+                        <div class="social-links">
+                            {% for i in model.person.idSocialNetwork %}
+              <a href = "#"> {{ i }} <br/></a>
+             {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="card-text"><strong>Дата добавления на сайт:</strong> {{ model.person.dateAdd | date("yyyy-MM-dd") }} в {{ model.person.dateAdd | date("HH:mm") }}</p>
+                    </div>
+                </div>
+                {% if model.person.license == true %}
+             <p class="card-text text-success"><strong>Есть лицензия</strong></p>
+             {%else%}
+              <p class="card-text text-danger"><strong>Нет лицензии</strong></p>
+              {% endif %}
+    {% if user.role == "admin"%}
+            <a class="btn btn-primary btn-lg" href="/editPerson{{ model.person.id }}" role="button">Редактировать полностью</a>
+{% endif %}
+    {% if user.role == "specialist" and user.id == model.person.personId%}
+            <a class="btn btn-primary btn-lg" href="/editAdvertising{{ model.person.id }}" role="button">Редактировать</a>
+{% endif %}
+    {% if user.role == "admin" or (user.role == "specialist" and user.id == model.person.personId) or user.role == "moderator"%}
+       <a class="btn btn-danger btn-lg" href="/deletePerson{{ model.person.id }}" role="button">Удалить</a>
+{% endif %}
+                <a class="btn btn-dark btn-lg" href="/1/page1" role="button">Назад</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

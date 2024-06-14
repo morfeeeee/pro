@@ -1,0 +1,27 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.LoginVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block tittle %}Login{% endblock %}
+{% block content %}
+<div class="container form-container">
+<div class="card mb-4">
+      <div class="card-body">
+<h1>Добро пожаловать</h1>
+    <form method="POST">
+     <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Логин:</label>
+        <input name="login" type="text" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Пароль:</label>
+        <input name="password" type="password" class="form-control" minlength="3" id="exampleInputPassword1">
+    </div>
+
+    <h5 class="text-info">Если вы входите в систему впервые, то чтобы продолжить работу, вас переведет на страницу, где необходимо будет добавить объявление</h5>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}
+

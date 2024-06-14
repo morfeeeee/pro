@@ -1,0 +1,31 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.ErrorAddUserVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block tittle %}addUser{% endblock %}
+{% block content %}
+<div class="container form-container">
+<div class="card mb-4">
+      <div class="card-body">
+    <form method="POST">
+     <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Логин:</label>
+        <input name="login" type="text" class="form-control" value="{{ model.login }}" id="exampleInputPassword1">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Пароль:</label>
+        <input name="password1" type="password" class="form-control" minlength="3" id="exampleInputPassword1">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Подтвердите пароль:</label>
+        <input name="password2" type="password" class="form-control" minlength="3" id="exampleInputPassword1">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+
+<h5>{{ model.message }}</h5>
+</div>
+</div>
+</div>
+{% endblock %}

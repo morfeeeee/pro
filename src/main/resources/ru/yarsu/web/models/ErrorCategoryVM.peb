@@ -1,0 +1,19 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.ErrorCategoryVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}ErrorAddCategory{% endblock %}
+{% block content %}
+<div class="container form-container">
+<div class="card mb-4">
+      <div class="card-body">
+<form method="POST">
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Введите категорию услуг:</label>
+        <input name="category" type="text" class="form-control" value="{{ model.category }}" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+    <h5>{{ model.message }}</h5>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

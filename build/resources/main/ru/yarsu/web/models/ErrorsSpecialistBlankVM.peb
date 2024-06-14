@@ -1,0 +1,83 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.ErrorsSpecialistBlankVM" #}
+
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}ErrorSpecialistBlank{% endblock %}
+{% block content %}
+<div class="container form-container">
+        <form method="POST">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Информация о пользователе</h5>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="inputName" class="form-label">Имя</label>
+                            <input name="name" type="text" class="form-control" id="inputName" value="{{ model.name }}" required="">
+                        </div>
+                        <div class="col">
+                            <label for="inputSurname" class="form-label">Фамилия</label>
+                            <input name="surname" type="text" class="form-control" value="{{ model.surname }}" id="inputSurname" required="">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPatronymic" class="form-label">Отчество</label>
+                        <input name="patronymic" type="text" class="form-control" value="{{ model.patronymic }}"  id="inputPatronymic" required="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPhoneNumber" class="form-label">Номер телефона (начиная с 8)</label>
+                        <input name="phoneNumber" type="text" class="form-control" value="{{ model.phoneNumber }}" id="inputPhoneNumber" required="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputCategory" class="form-label">Категория услуги</label>
+                        <select name="category" class="form-select" aria-label="Default select example">
+              <option selected>{{ model.category.name }}</option>
+
+              {% for profession in model.listProfessions %}
+                 <option value={{profession}}>{{profession}}</option>
+        {% endfor %}
+           </select>
+                    </div>
+                    <h5 class="card-title">Добавить образование</h5>
+                    <div class="mb-3">
+                        <select name="education1" class="form-select" aria-label="Default select example">
+          <option selected>{{ model.person.education[0] }}</option>
+          {% for profession in model.listProfessions %}
+             <option value="{{profession}}">{{profession}}</option>
+    {% endfor %}
+       </select>
+                    </div>
+                    <div class="mb-3">
+                        <select name="education2" class="form-select" aria-label="Default select example">
+          <option selected>{% if model.education2 != null %}{{ model.education2 }}{% endif %}</option>
+          {% for profession in model.listProfessions %}
+             <option value="{{profession}}">{{profession}}</option>
+    {% endfor %}
+       </select>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input name="license" class="form-check-input" type="checkbox" id="inputLicense"  {% if model.license == true %}checked{% endif %}>
+                        <label class="form-check-label" for="inputLicense">
+                            Есть лицензия
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputVk" class="form-label">Vk</label>
+                        <input name="vk" type="text" class="form-control" id="inputVk" value="{{ model.vkId }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputTelegram" class="form-label">Telegram</label>
+                        <input name="telegram" type="text" class="form-control" id="inputTelegram" value="{{ model.telegramId}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputFacebook" class="form-label">Facebook</label>
+                        <input name="facebook" type="text" class="form-control" id="inputFacebook" value="{{ model.facebookId }}">
+                    </div>
+                     {% for error in model.errors %}
+                    <h5 class="card-text">{{ error }}</h5>
+
+                {% endfor %}
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

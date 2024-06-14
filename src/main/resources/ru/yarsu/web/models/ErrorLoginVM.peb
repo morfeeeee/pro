@@ -1,0 +1,28 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.ErrorLoginVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block tittle %}Login{% endblock %}
+{% block content %}
+<div class="container form-container">
+<div class="card mb-4">
+      <div class="card-body">
+<h1>Добро пожаловать</h1>
+    <form method="POST">
+     <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Логин:</label>
+        <input name="login" type="text" class="form-control" value="{{ model.login }}" id="exampleInputPassword1">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Пароль:</label>
+        <input name="password" type="password" class="form-control" minlength="3" id="exampleInputPassword1">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+<h4>{{ model.message }}</h4>
+</div>
+</div>
+</div>
+{% endblock %}
+

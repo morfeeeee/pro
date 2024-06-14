@@ -1,0 +1,22 @@
+{# @pebvariable name="model" type="ru.yarsu.web.models.DeleteCategoryVM" #}
+    {% extends "./partials/Layout.peb" %}
+    {% block title %}DeleteCategory{% endblock %}
+{% block content %}
+<div class="container form-container">
+<div class="card mb-4">
+      <div class="card-body">
+<form method="POST">
+        <div class="mb-3">
+       <select name="category" class="form-select" aria-label="Default select example">
+          <option selected></option>
+          {% for category in model.listCategory %}
+             <option value={{category}}>{{category}}</option>
+    {% endfor %}
+       </select>
+       </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+</div>
+</div>
+</div>
+   {% endblock %}
